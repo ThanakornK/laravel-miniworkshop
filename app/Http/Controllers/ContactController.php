@@ -41,7 +41,7 @@ class ContactController extends Controller
             'phone' => 'required'
         ]);
         Contact::create($request->all());
-        return rediract()->back();
+        return redirect()->back();
     }
 
     /**
