@@ -27,8 +27,7 @@
                         <td>
                             <form action="{{route('contact.destroy',$row->id)}}" method="post">
                                 @csrf @method('DELETE')
-                                <input type="submit" value="Delete" class="btn btn-danger" 
-                                onclick="return confirm('Are you confirm to delete {{$row->name}} ?')">
+                                <input type="submit" value="Delete" data-name="{{$row->name}}" class="btn btn-danger deleteForm">
                             </form>
                         </td>
                     </tr>
