@@ -14,7 +14,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $data = Contact::all();
+        return view('contact.index',compact(['data']));
     }
 
     /**
@@ -41,7 +42,7 @@ class ContactController extends Controller
             'phone' => 'required'
         ]);
         Contact::create($request->all());
-        return redirect()->back();
+        return redirect('/contact');
     }
 
     /**
@@ -63,7 +64,8 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Contact::find($id);
+        return view('contact.edit',compact(['data']));
     }
 
     /**
@@ -75,7 +77,13 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required'
+        ]);
+        Contact::find($id)->update($request->all());
+        return redirect('/contact');
     }
 
     /**
@@ -86,6 +94,7 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Contact::find($id)->delete();
+        return redirect('/contact');
     }
 }
